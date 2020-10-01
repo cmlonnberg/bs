@@ -1,3 +1,4 @@
+# coding=utf-8
 import time
 import csv
 from selenium import webdriver
