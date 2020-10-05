@@ -22,4 +22,6 @@ RUN pip install selenium
 
 COPY . /app
 
+RUN docker-compose up
+
 RUN python /app/main.py
