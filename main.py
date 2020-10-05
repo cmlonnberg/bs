@@ -161,7 +161,7 @@ def main():
     competencies = get_competencies(add_links, driver)
     make_dir()
     store_data(competencies, locations)
-    driver.close()
+    # driver.close()
 
 
 start_time = time.time()
