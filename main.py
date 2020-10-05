@@ -1,16 +1,28 @@
 # coding=utf-8
 import time
 import csv
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 from datetime import datetime
 
-
-def init_webdriver():
-    print("Running chrome")
+"""
+def init_webdriver_local():
+    print("init_webdriver_local()")
     return webdriver.Chrome(ChromeDriverManager().install())
+"""
+
+
+def init_webdriver_docker():
+    print("init_webdriver_docker()")
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    options.add_argument("--disable-dev-shm-usage")
+    return webdriver.Chrome("/usr/local/bin/chromedriver", options=options)
 
 
 def init_webdriver_headless():
@@ -112,13 +124,20 @@ def get_competencies(add_links, driver):
     return competencies
 
 
+def make_dir():
+    print("make_dir()")
+    if not os.path.isdir('/data/'):
+        os.mkdir('/data/')
+
+
 def store_data(competencies, locations):
-    print("store_data(competencies)")
+    print("store_data(competencies, locations)")
     date = datetime.now().date().strftime("%Y-%m-%d")
     hour_of_day = datetime.now().strftime("%H:%M")
     filename = date + ".csv"
     path = "data/"
     file = path + filename
+    print("Saving data to file: ", file)
     with open(file, 'a') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow([hour_of_day, date, locations, competencies])
@@ -127,8 +146,9 @@ def store_data(competencies, locations):
 def main():
     print("Starting: main()")
 
-    # driver = init_webdriver()
-    driver = init_webdriver_headless()
+    driver = init_webdriver_docker()
+    # driver = init_webdriver_local()
+    # driver = init_webdriver_headless()
 
     login_to_page(driver)
     assert_login(driver)
@@ -139,6 +159,7 @@ def main():
     new_adds = find_adds(driver)
     add_links = get_links(new_adds)
     competencies = get_competencies(add_links, driver)
+    make_dir()
     store_data(competencies, locations)
     driver.close()
 
