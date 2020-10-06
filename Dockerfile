@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.8 as pyproj
 
 # install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -24,4 +24,4 @@ COPY . /app
 
 # RUN python main.py
 
-RUN python3 /app/main.py
+# RUN python3 /app/main.py
