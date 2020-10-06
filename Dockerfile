@@ -26,3 +26,5 @@ COPY . /app
 WORKDIR /app
 
 RUN python3 main.py
+
+RUN ls
