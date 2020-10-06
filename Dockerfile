@@ -1,4 +1,4 @@
-FROM python:3.8 as pyproj
+FROM python:3.8
 
 # install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -22,6 +22,10 @@ RUN pip install selenium
 
 COPY . /app
 
+# COPY . /app
+
 # RUN python main.py
 
 # RUN python3 /app/main.py
+
+CMD ["python3", "/app/main.py"]
