@@ -24,4 +24,4 @@ COPY . /app
 
 # RUN python main.py
 
-RUN python3 main.py
+RUN python3 /app/main.py
