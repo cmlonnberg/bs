@@ -22,4 +22,8 @@ RUN pip install selenium
 
 COPY . /app
 
-RUN cd /app && python main.py
+WORKDIR /app
+
+RUN python main.py
+
+# RUN cd /app && python main.py
