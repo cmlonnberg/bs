@@ -135,7 +135,7 @@ def store_data(competencies, locations):
     date = datetime.now().date().strftime("%Y-%m-%d")
     hour_of_day = datetime.now().strftime("%H:%M")
     filename = date + ".csv"
-    path = "data/"
+    path = "/data/"
     file = path + filename
     print("Saving data to file: ", file)
     with open(file, 'a') as csvfile:
@@ -161,7 +161,7 @@ def main():
     competencies = get_competencies(add_links, driver)
     make_dir()
     store_data(competencies, locations)
-    # driver.close()
+    driver.close()
 
 
 start_time = time.time()
