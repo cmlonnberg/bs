@@ -24,6 +24,6 @@ COPY . /app
 
 WORKDIR /app
 
-RUN python main.py
+# RUN python main.py
 
 # RUN cd /app && python main.py
