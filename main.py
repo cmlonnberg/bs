@@ -24,7 +24,7 @@ def init_webdriver_docker():
     options.add_argument("--disable-dev-shm-usage")
     return webdriver.Chrome("/usr/local/bin/chromedriver", options=options)
 
-
+"""
 def init_webdriver_headless():
     print("Running headless chrome")
     options = Options()
@@ -32,6 +32,7 @@ def init_webdriver_headless():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
     return webdriver.Chrome(ChromeDriverManager().install(), options=options)
+"""
 
 
 def login_to_page(driver):
@@ -93,7 +94,7 @@ def find_adds(driver):
     print("Total no of adds: ", len(adds))
     new_adds = []
     for i in adds:
-        if "Ny" in i.text:
+        if "igår" in i.text:
             # if "igår" in i.text:
             new_adds.append(i)
     print("New adds: ", len(new_adds))
