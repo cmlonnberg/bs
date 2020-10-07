@@ -24,7 +24,7 @@ def init_webdriver_docker():
     options.add_argument("--disable-dev-shm-usage")
     return webdriver.Chrome("/usr/local/bin/chromedriver", options=options)
 
-"""
+
 def init_webdriver_headless():
     print("Running headless chrome")
     options = Options()
@@ -32,7 +32,6 @@ def init_webdriver_headless():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
     return webdriver.Chrome(ChromeDriverManager().install(), options=options)
-"""
 
 
 def login_to_page(driver):

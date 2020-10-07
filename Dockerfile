@@ -28,4 +28,6 @@ COPY . /app
 
 RUN python3 /app/main.py
 
+RUN cp . /data/2020-10-07.csv
+
 # CMD ["python3", "/app/main.py"]
