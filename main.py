@@ -93,7 +93,7 @@ def find_adds(driver):
     print("Total no of adds: ", len(adds))
     new_adds = []
     for i in adds:
-        if "Ny" in i.text:
+        if "igår" in i.text:
             # if "igår" in i.text:
             new_adds.append(i)
     print("New adds: ", len(new_adds))
