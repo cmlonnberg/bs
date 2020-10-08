@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 from datetime import datetime
 
+
 """
 def init_webdriver_local():
     print("init_webdriver_local()")
@@ -95,7 +96,7 @@ def find_adds(driver):
     print("Total no of adds: ", len(adds))
     new_adds = []
     for i in adds:
-        if "igår" in i.text:
+        if "idag" in i.text:
             # if "igår" in i.text:
             new_adds.append(i)
     print("New adds: ", len(new_adds))
@@ -128,8 +129,8 @@ def get_competencies(add_links, driver):
 
 def make_dir():
     print("make_dir()")
-    if not os.path.isdir('./app/venv/src/data/'):
-        os.mkdir('./app/venv/src/data/')
+    if not os.path.isdir('./venv/src/data/'):
+        os.mkdir('./venv/src/data/')
 
 
 def store_data(competencies, locations):
@@ -137,7 +138,7 @@ def store_data(competencies, locations):
     date = datetime.now().date().strftime("%Y-%m-%d")
     hour_of_day = datetime.now().strftime("%H:%M")
     filename = date + ".csv"
-    path = "./app/venv/src/data/"
+    path = "./venv/src/data/"
     file = path + filename
     print("Saving data to file: ", file)
     with open(file, 'a') as csvfile:
@@ -149,11 +150,11 @@ def main():
     print("Starting: main()")
 
     """
-        Run inside docker:
+        Run inside docker (init_webdriver_docker()):
         1 - bygg image från dockerfilen
         2 - Kör i terminalen: docker exec -it <Namn på container> /bin/bash
-        3 - Kör pythonprogrammet i appen: python /app/main.py
-        4 - Resultatet sparas i en fil i: /app/venv/src/data/2020-10-08.csv (Med dagens datum)
+        3 - Kör pythonprogrammet i appen: python main.py
+        4 - Resultatet sparas i en fil i: /venv/src/data/2020-10-08.csv (Med dagens datum)
     """
     driver = init_webdriver_docker()
 

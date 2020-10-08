@@ -20,6 +20,6 @@ RUN pip install --upgrade pip
 # install selenium
 RUN pip install selenium
 
-COPY . /app
+COPY . .
 
 # RUN python3 /app/main.py
