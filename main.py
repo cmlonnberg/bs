@@ -4,7 +4,7 @@ import csv
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-# from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager  # Comment out if running in docker
 from selenium.webdriver.support.ui import Select
 from datetime import datetime
 
@@ -25,6 +25,7 @@ def init_webdriver_docker():
     return webdriver.Chrome("/usr/local/bin/chromedriver", options=options)
 
 
+"""
 def init_webdriver_headless():
     print("Running headless chrome")
     options = Options()
@@ -32,6 +33,7 @@ def init_webdriver_headless():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
     return webdriver.Chrome(ChromeDriverManager().install(), options=options)
+"""
 
 
 def login_to_page(driver):
@@ -126,8 +128,8 @@ def get_competencies(add_links, driver):
 
 def make_dir():
     print("make_dir()")
-    if not os.path.isdir('/data/'):
-        os.mkdir('/data/')
+    if not os.path.isdir('./app/venv/src/data/'):
+        os.mkdir('./app/venv/src/data/')
 
 
 def store_data(competencies, locations):
@@ -135,7 +137,7 @@ def store_data(competencies, locations):
     date = datetime.now().date().strftime("%Y-%m-%d")
     hour_of_day = datetime.now().strftime("%H:%M")
     filename = date + ".csv"
-    path = "/data/"
+    path = "./app/venv/src/data/"
     file = path + filename
     print("Saving data to file: ", file)
     with open(file, 'a') as csvfile:
@@ -146,7 +148,15 @@ def store_data(competencies, locations):
 def main():
     print("Starting: main()")
 
+    """
+        Run inside docker:
+        1 - bygg image från dockerfilen
+        2 - Kör i terminalen: docker exec -it <Namn på container> /bin/bash
+        3 - Kör pythonprogrammet i appen: python /app/main.py
+        4 - Resultatet sparas i en fil i: /app/venv/src/data/2020-10-08.csv (Med dagens datum)
+    """
     driver = init_webdriver_docker()
+
     # driver = init_webdriver_local()
     # driver = init_webdriver_headless()
 
